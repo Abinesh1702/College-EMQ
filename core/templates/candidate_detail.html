@@ -1,0 +1,27 @@
+<!-- candidate_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1 class="text-2xl font-bold text-center mt-5">Candidate Details</h1>
+
+  <div class="my-5">
+    <p><strong>ID:</strong> {{ candidate.pk }}</p>
+    <p><strong>Name:</strong> {{ candidate.name }}</p>
+    <p><strong>Slogan:</strong> {{ candidate.slogan }}</p>
+    <p><strong>Text:</strong> {{ candidate.text }}</p>
+    <p><strong>Para1:</strong> {{ candidate.para1 }}</p>
+    <p><strong>Para2:</strong> {{ candidate.para2 }}</p>
+    <p><strong>Para3:</strong> {{ candidate.para3 }}</p>
+    <p><strong>Para4:</strong> {{ candidate.para4 }}</p>
+    <p><strong>Para5:</strong> {{ candidate.para5 }}</p>
+
+    {% if candidate.profile_picture %}
+      <div>
+        <strong>Profile Picture:</strong>
+        <img src="{{ candidate.profile_picture.url }}" alt="Profile Picture" class="rounded-full w-32 h-32">
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock %}

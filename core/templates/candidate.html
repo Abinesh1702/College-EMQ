@@ -1,0 +1,42 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 min-h-screen flex items-center justify-center py-10">
+    <div class="max-w-2xl rounded-lg shadow-lg bg-white overflow-hidden transform hover:scale-105 transition-transform duration-300">
+        <!-- Header Section -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6">
+            <h1 class="text-2xl font-extrabold text-center">{{ candidate.name }}</h1>
+            <h2 class="text-xl font-bold text-center mt-2">{{ candidate.slogan }}</h2>
+            <p class="text-gray-700 leading-relaxed text-center text-white mt-2">{{ candidate.text }}</p>
+        </div>
+
+        <!-- Profile Picture Section -->
+        <div class="flex justify-center mt-6">
+            {% if candidate.profile_picture %}
+              <img src="{{ candidate.profile_picture.url }}" alt="Profile Picture" class="rounded-full w-32 h-32 border-4 border-blue-500">
+            {% else %}
+            <p class="text-gray-500">No image uploaded</p>
+            {% endif %}
+        </div>
+
+        <!-- Manifesto Text -->
+        <div class="p-6">
+            <h3 class="text-lg font-semibold text-gray-800 text-center mb-4">Manifesto Details</h3>
+
+            <!-- List of Principles -->
+            <ul class="list-disc list-inside space-y-4 mt-6 text-gray-700">
+                <h1><b>I Will</b></h1>
+                {% if candidate.para1 %}<li>{{ candidate.para1 }}</li>{% endif %}
+                {% if candidate.para2 %}<li>{{ candidate.para2 }}</li>{% endif %}
+                {% if candidate.para3 %}<li>{{ candidate.para3 }}</li>{% endif %}
+                {% if candidate.para4 %}<li>{{ candidate.para4 }}</li>{% endif %}
+                <h1><b>I Will Try to :</b></h1>
+                {% if candidate.para5 %}<li>{{ candidate.para5 }}</li>{% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

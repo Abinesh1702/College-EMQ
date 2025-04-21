@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<header class="text-grey py-4 ml-60 w-1/2">
+    <div class="container mx-auto px-4">
+    <h1 class="text-3xl font-bold ml-32">College Election Dashboard</h1>
+    </div>
+</header>
+
+<main class="container mx-auto px-4 py-6 ml-60 w-full">
+    <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6 ml-32 w-full">
+        <a href="http://192.168.29.33:8000/candidates/">
+            <div class="bg-gradient-to-br from-rose-500 to-violet-600 text-white shadow-md rounded-lg p-4 flex justify-between items-center">
+                <div>
+                    <h2 class="text-white text-xl font-bold">Candidates</h2>
+                    <p class="text-2xl font-bold">{{ candidate_count }}</p>
+                </div>
+                <div>
+                    <span class="text-5xl"><i class="fa-solid fa-people-group"></i></span>
+                </div>
+            </div>
+        </a>
+
+        <a href="http://192.168.29.33:8000/regiter-voters/">
+            <div class="bg-gradient-to-br from-teal-400 to-emerald-700 text-white shadow-md rounded-lg p-4 flex justify-between items-center">
+                <div>
+                    <h2 class="text-white text-xl font-bold">Voters Register</h2>
+                    <p class="text-2xl font-bold">{{ voters }}</p>
+                </div>
+                <div>
+                    <span class="text-5xl"><i class="fa-duotone fa-solid fa-person-booth"></i></span>
+                </div>
+            </div>
+        </a>
+               
+        <a href="http://192.168.29.33:8000/voters-list/">
+            <div class="bg-gradient-to-r from-yellow-500 to-pink-600 text-white shadow-md rounded-lg p-4 flex justify-between items-center">
+                <div>
+                    <h2 class="text-white text-xl font-bold">Total Votes</h2>
+                    <p class="text-2xl font-bold">{{ true_voters }}</p>
+                </div>
+                <div>
+                    <span class="text-5xl"><i class="fa-solid fa-check-to-slot"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-32 w-3/4 mt-10">
+        <h1 class="font-bold text-xl uppercase my-5">Election Results</h1>
+        <table class="w-full text-sm text-left rtl:text-right text-gray-100 dark:text-gray-100">
+            <thead class="text-xs text-white uppercase bg-gray-600 dark:text-white">
+                <tr>
+                    <th scope="col" class="px-6 py-6 font-bold text-md">
+                        S.no
+                    </th>
+                    <th scope="col" class="px-6 py-6 font-bold text-md">
+                        Image
+                    </th>
+                    <th scope="col" class="px-6 py-6 font-bold text-md">
+                        Candidate name
+                    </th>
+                    <th scope="col" class="px-6 py-6 font-bold text-md">
+                        slogan
+                    </th>
+                    <th scope="col" class="px-6 py-6 font-bold text-md">
+                        total votes
+                    </th>
+                </tr>
+            </thead>
+            {% for candidate in candidates %}
+            <tbody>
+                <tr class="bg-white text-black border-b border-blue-400">
+                    <th scope="row" class="px-6 py-4 ">
+                        {{forloop.counter}}
+                    </th>
+                    <th scope="row" class="px-6 py-4 ">
+                        {% if candidate.profile_picture %}
+                        <img src="{{ candidate.profile_picture.url }}" alt="Profile Picture" class="rounded-full w-20 h-20 border-4 border-blue-500">
+                      {% else %}
+                      <p class="text-gray-500">No image uploaded</p>
+                      {% endif %}
+                    </th>
+                    <th scope="row" class="px-6 py-4 ">
+                        {{candidate.name}}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{candidate.slogan}}
+                    </td>
+                    <td class="px-6 py-4 font-bold">
+                        <b>
+
+                            {{candidate.vote_count}}
+                        </b>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <!-- Candidate Vote Counts -->
+
+</main>
+
+
+
+
+{% endblock %}
